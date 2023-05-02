@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr, Field
 from datetime import date
 
 data = date.today()
-data_texto = f'{data.day}/{data.month}/{data.year}'
+data_texto = data.strftime('%d/%m/%Y')
 
 class Venda(BaseModel):
     id: int | None | str
