@@ -8,7 +8,7 @@ class Venda(BaseModel):
     id: int | None | str
     item: str
     tipo: str
-    tamanho: str
+    tamanho: str | int | None
     valor: float
     quantidade: int
     forma_pagamento: str
@@ -21,7 +21,7 @@ class Venda(BaseModel):
             id=str(venda_dict['_id']),
             item=venda_dict['item'],
             tipo=venda_dict['tipo'],
-            tamanho=['tamanho'],
+            tamanho=venda_dict['tamanho'],
             valor=venda_dict['valor'],
             quantidade=venda_dict['quantidade'],
             forma_pagamento=venda_dict['forma_pagamento'],
@@ -34,6 +34,7 @@ class Venda(BaseModel):
         return{
             "item":self.item,
             "tamanho":self.tamanho,
+            "tipo":self.tipo,
             "valor":self.valor,
             "quantidade":self.quantidade,
             "forma_pagamento":self.forma_pagamento,
