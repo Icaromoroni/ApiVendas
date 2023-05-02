@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from ..presentation.viewmodels import Venda, data_texto
 
-class RepositoryVendaMongoDB():
+class VendaRepositoryMongoDB():
 
     def __init__(self) -> None:
 
@@ -17,8 +17,9 @@ class RepositoryVendaMongoDB():
         except ConnectionFailure as e:
             print(f'Não foi possível conectar ao MongoDB: {e}')
         
-    def obter_todas(self):
-        pass
+    def todas(self, skip, limit):
+        vendas = self.vendas.find().skip(skip).limit(limit)        
+        return [Venda.fromDict(d_dict) for d_dict in vendas]
 
     def salvar(self, venda:Venda):
         venda.data_venda = data_texto
